@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://btpv0jw8cn8yg"]
+
+[ext_resource type="Texture2D" uid="uid://dax4srugihapr" path="res://assets/sprites/icon.svg" id="1_h17bh"]
+[ext_resource type="Script" uid="uid://b8qgqrcaivgvs" path="res://scripts/test_enemy.gd" id="1_mkyue"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h17bh"]
+size = Vector2(16, 16)
+
+[node name="TestEnemy" type="CharacterBody2D" groups=["Actors"]]
+collision_layer = 4
+collision_mask = 10
+floor_snap_length = 5.0
+script = ExtResource("1_mkyue")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -8)
+scale = Vector2(0.125, 0.125)
+texture = ExtResource("1_h17bh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_h17bh")
+
+[node name="GunTip" type="Marker2D" parent="."]
+position = Vector2(-14, -7)
