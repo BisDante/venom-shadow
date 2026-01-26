@@ -1,7 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://decl64rhft3v5"]
+[gd_scene load_steps=8 format=3 uid="uid://decl64rhft3v5"]
 
 [ext_resource type="Script" uid="uid://cpiqekhl8fj6b" path="res://scripts/player.gd" id="1_hjaqi"]
 [ext_resource type="Texture2D" uid="uid://dax4srugihapr" path="res://assets/sprites/icon.svg" id="1_xo3ru"]
+[ext_resource type="Script" uid="uid://drk04gvom83sf" path="res://scripts/state_machine.gd" id="3_qhqgy"]
+[ext_resource type="Script" uid="uid://bvod71646dwcy" path="res://scripts/player_run.gd" id="4_dqkch"]
+[ext_resource type="Script" uid="uid://bsgjjl21qjiug" path="res://scenes/player_jump.gd" id="5_qlg0r"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xo3ru"]
 size = Vector2(16, 32)
@@ -35,3 +38,15 @@ collision_mask = 16
 position = Vector2(0, -15.5)
 shape = SubResource("RectangleShape2D_g2els")
 debug_color = Color(0.19621193, 0.6417471, 0, 0.41960785)
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("3_qhqgy")
+
+[node name="PlayerRun" type="Node" parent="StateMachine" node_paths=PackedStringArray("jump")]
+script = ExtResource("4_dqkch")
+jump = NodePath("../PlayerJump")
+
+[node name="PlayerJump" type="Node" parent="StateMachine"]
+script = ExtResource("5_qlg0r")
+
+[node name="PlayerFall" type="Node" parent="StateMachine"]
