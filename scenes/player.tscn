@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://decl64rhft3v5"]
+[gd_scene load_steps=5 format=3 uid="uid://decl64rhft3v5"]
 
 [ext_resource type="Script" uid="uid://cpiqekhl8fj6b" path="res://scripts/player.gd" id="1_hjaqi"]
 [ext_resource type="Texture2D" uid="uid://dax4srugihapr" path="res://assets/sprites/icon.svg" id="1_xo3ru"]
@@ -6,7 +6,11 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xo3ru"]
 size = Vector2(16, 32)
 
-[node name="Player" type="CharacterBody2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g2els"]
+size = Vector2(24, 41)
+
+[node name="Player" type="CharacterBody2D" groups=["Actors"]]
+collision_mask = 6
 script = ExtResource("1_hjaqi")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -23,3 +27,11 @@ position = Vector2(0, -16)
 
 [node name="GunTip" type="Marker2D" parent="GunPivot"]
 position = Vector2(19, 0)
+
+[node name="GrazeRange" type="Area2D" parent="."]
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GrazeRange"]
+position = Vector2(0, -15.5)
+shape = SubResource("RectangleShape2D_g2els")
+debug_color = Color(0.19621193, 0.6417471, 0, 0.41960785)

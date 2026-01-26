@@ -8,10 +8,13 @@ const bullet = preload("res://scenes/bullet.tscn")
 
 enum State {IDLE, RUN, CROUCH, JUMP, FALL, DEATH, SPAWNING, WIN}
 enum AimState {UP, DOWN, FORWARD}
+enum Mode {GREEN, PURPLE}
 
 var curr_state : State = State.IDLE
 var curr_aim_state : AimState = AimState.FORWARD
+var curr_mode = Mode.GREEN
 var facing = 1 # 1 direita -1 esquerda
+var hp = 3
 
 func enter_state(state: State):
 	curr_state = state
@@ -29,6 +32,11 @@ func quit_state():
 func change_state(state: State):
 	quit_state()
 	enter_state(state)
+
+
+func receive_damage():
+	hp -= 1
+	print("Ouch! HP: ", hp)
 
 
 func _physics_process(delta: float) -> void:
@@ -56,8 +64,7 @@ func _physics_process(delta: float) -> void:
 			
 		gun_pivot.rotation_degrees = shoot_angle
 		var new_bullet = bullet.instantiate()
-		new_bullet.set_angle(shoot_angle)
 		get_parent().add_child(new_bullet)
-		new_bullet.global_position = gun_tip.global_position
+		new_bullet.setup(true, gun_tip.global_position, shoot_angle, Mode.GREEN)
 
 	move_and_slide()
