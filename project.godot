@@ -11,8 +11,9 @@ config_version=5
 [application]
 
 config/name="Venom Shadow"
+run/main_scene="uid://bwjgucfvcv8lq"
 config/features=PackedStringArray("4.5", "GL Compatibility")
-config/icon="res://icon.svg"
+config/icon="res://assets/sprites/icon.svg"
 
 [rendering]
 
