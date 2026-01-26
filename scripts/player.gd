@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 const SPEED = 200.0
 const JUMP_VELOCITY = -300.0
-const bullet = preload("res://scene/bullet.tscn")
+const bullet = preload("res://scenes/bullet.tscn")
 @onready var gun_tip = $GunPivot/GunTip
 
 enum State {IDLE, RUN, CROUCH, JUMP, FALL, DEATH, SPAWNING, WIN}
