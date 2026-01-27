@@ -11,6 +11,8 @@ func update(delta):
 	current_state.update(delta)
 	
 func change_state(new_state):
+	if new_state == current_state:
+		return
 	current_state.exit()
-	new_state.enter()
 	current_state = new_state
+	current_state.enter()

@@ -46,6 +46,11 @@ position = Vector2(347, 117)
 [node name="Player" parent="." instance=ExtResource("1_e15k8")]
 position = Vector2(15, 160)
 
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2(0, -16)
+position_smoothing_enabled = true
+position_smoothing_speed = 4.0
+
 [node name="Killzone" parent="." instance=ExtResource("4_80utq")]
 position = Vector2(10, 243)
 
