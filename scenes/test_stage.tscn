@@ -1,11 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://bwjgucfvcv8lq"]
+[gd_scene load_steps=7 format=3 uid="uid://bwjgucfvcv8lq"]
 
 [ext_resource type="PackedScene" uid="uid://decl64rhft3v5" path="res://scenes/player.tscn" id="1_e15k8"]
 [ext_resource type="Texture2D" uid="uid://dax4srugihapr" path="res://assets/sprites/icon.svg" id="2_m04ur"]
 [ext_resource type="PackedScene" uid="uid://btpv0jw8cn8yg" path="res://scenes/test_enemy.tscn" id="3_s7ml3"]
+[ext_resource type="PackedScene" uid="uid://c556gkchiyx1k" path="res://scenes/killzone.tscn" id="4_80utq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sxr5r"]
 size = Vector2(32, 32)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_lpint"]
 
 [node name="TestStage" type="Node2D"]
 
@@ -42,3 +45,9 @@ position = Vector2(347, 117)
 
 [node name="Player" parent="." instance=ExtResource("1_e15k8")]
 position = Vector2(15, 160)
+
+[node name="Killzone" parent="." instance=ExtResource("4_80utq")]
+position = Vector2(10, 243)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone"]
+shape = SubResource("WorldBoundaryShape2D_lpint")
