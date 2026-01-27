@@ -10,11 +10,11 @@ const bullet = preload("res://scenes/bullet.tscn")
 
 var curr_mode = Global.Mode.GREEN
 var facing = 1 # 1 direita -1 esquerda
-var hp = 3
+var hp = 6
 
 
-func receive_damage():
-	hp -= 1
+func receive_damage(damage):
+	hp -= damage
 	print("Ouch! HP: ", hp)
 
 

@@ -16,7 +16,7 @@ func _ready() -> void:
 	sprite.modulate = Color(0, 0.8, 0)
 
 
-func receive_damage():
+func receive_damage(damage):
 	print("ouch!")
 	
 
