@@ -1,17 +1,11 @@
 extends State
 
 @export var run : Node
-@export var fall : Node
-
-func enter():
-	actor.velocity.y = actor.JUMP_VELOCITY
-
+@export var glide : Node
 
 func update(delta):
 	actor.velocity += actor.get_gravity() * delta
-	
-	if actor.velocity.y >= 0:
-		change_state.emit(fall)
+
 	if actor.is_on_floor():
 		change_state.emit(run)
 		
@@ -20,6 +14,9 @@ func update(delta):
 		actor.velocity.x = direction * actor.SPEED
 	else:
 		actor.velocity.x = move_toward(actor.velocity.x, 0, actor.SPEED)
+
+	if Input.is_action_just_pressed("ui_accept"):
+		change_state.emit(glide)
 
 	if Input.is_action_just_pressed("mode"):
 		actor.change_mode()
