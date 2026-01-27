@@ -3,6 +3,7 @@ class_name Bullet
 
 const KILLTIME = 120
 const SPEED = 1000
+const DAMAGE = 2
 
 @onready var sprite = $Sprite2D
 
@@ -43,6 +44,10 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_body_entered(body: Node2D) -> void:
-	if body.is_in_group("Actors") and body.curr_mode != mode:
-		body.receive_damage()
+	if body.is_in_group("Player") and body.curr_mode != mode:
+		body.receive_damage(DAMAGE)
 		queue_free()
+	elif body.is_in_group("Enemies"):
+		if body.curr_mode != mode:
+			body.receive_damage(DAMAGE/2)
+			queue_free()
