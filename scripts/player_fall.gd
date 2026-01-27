@@ -29,6 +29,6 @@ func update(delta):
 		actor.gun_pivot.rotation_degrees = shoot_angle
 		var new_bullet = actor.bullet.instantiate()
 		get_parent().add_child(new_bullet)
-		new_bullet.setup(true, actor.gun_tip.global_position, shoot_angle, Global.Mode.GREEN)
+		new_bullet.setup(true, actor.gun_tip.global_position, shoot_angle, actor.curr_mode)
 
 	actor.move_and_slide()

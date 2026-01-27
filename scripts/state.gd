@@ -2,6 +2,7 @@ extends Node
 class_name State
 
 var actor
+signal change_state(new_state)
 
 func enter():
 	pass
