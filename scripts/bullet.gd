@@ -1,16 +1,14 @@
-extends Sprite2D
+extends Area2D
 class_name Bullet
-
-enum Mode {GREEN, PURPLE}
 
 const KILLTIME = 120
 const SPEED = 1000
 
-@onready var collision_area = $Area2D
+@onready var sprite = $Sprite2D
 
 var kill_time = KILLTIME
 var velocity = Vector2.RIGHT
-var mode = Mode.GREEN
+var mode := Global.Mode.GREEN
 
 func setup(is_players: bool, pos, angle: int, _mode):
 	mode = _mode
@@ -18,12 +16,18 @@ func setup(is_players: bool, pos, angle: int, _mode):
 	set_angle(angle)
 	
 	if is_players:
-		collision_area.set_collision_layer_value(4, true)
-		collision_area.set_collision_mask_value(3, true)
+		set_collision_layer_value(4, true)
+		set_collision_mask_value(3, true)
 		
 	else:
-		collision_area.set_collision_layer_value(5, true)
-		collision_area.set_collision_mask_value(1, true)
+		set_collision_layer_value(5, true)
+		set_collision_mask_value(1, true)
+		
+	if mode == Global.Mode.GREEN:
+		sprite.modulate = Color(0, 0.8, 0)
+	else:
+		sprite.modulate = Color(0.6, 0, 0.6)
+
 
 func set_angle(angle) -> void:
 	velocity = velocity.rotated(deg_to_rad(angle))
@@ -38,7 +42,7 @@ func _physics_process(delta: float) -> void:
 		queue_free()
 
 
-func _on_area_2d_body_entered(body: Node2D) -> void:
-	if body.is_in_group("Actors"):
+func _on_body_entered(body: Node2D) -> void:
+	if body.is_in_group("Actors") and body.curr_mode != mode:
 		body.receive_damage()
-	queue_free()
+		queue_free()
