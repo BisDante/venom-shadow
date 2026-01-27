@@ -34,6 +34,7 @@ Actors="people who move and have HP and shit"
 Bullets=""
 Player=""
 Enemies=""
+Level=""
 
 [input]
 
