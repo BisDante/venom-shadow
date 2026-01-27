@@ -21,15 +21,19 @@ Global="*res://scripts/global.gd"
 
 [display]
 
-window/size/viewport_width=426
+window/size/viewport_width=427
 window/size/viewport_height=240
-window/size/mode=2
+window/size/window_width_override=1280
+window/size/window_height_override=720
 window/stretch/mode="viewport"
+window/stretch/aspect="keep_width"
 
 [global_group]
 
 Actors="people who move and have HP and shit"
 Bullets=""
+Player=""
+Enemies=""
 
 [input]
 
