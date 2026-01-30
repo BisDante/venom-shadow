@@ -1,36 +1,37 @@
 extends State
 
-@export var jump : Node
+@export var SPEED = 200.0
+@export var JUMP_VELOCITY = -300.0
+@export var jump: Node
 @export var fall: Node
+@export var crouch: Node
 
+	
 func update(delta):
 	if not actor.is_on_floor():
 		change_state.emit(fall)
 
-	if Input.is_action_just_pressed("ui_accept") and actor.is_on_floor():
+	if Input.is_action_just_pressed("ui_accept"):
 		change_state.emit(jump)
+
+	if Input.is_action_pressed("ui_down"):
+		change_state.emit(crouch)
 
 	var direction := Input.get_axis("ui_left", "ui_right")
 	if direction:
 		if actor.is_on_floor():
 			actor.facing = sign(direction)
-		actor.velocity.x = direction * actor.SPEED
+		actor.velocity.x = direction * SPEED
 	else:
-		actor.velocity.x = move_toward(actor.velocity.x, 0, actor.SPEED)
-
-	var shoot_angle = 0 + 90 * (actor.facing - 1)
+		actor.velocity.x = move_toward(actor.velocity.x, 0, SPEED)
 	
 	if Input.is_action_just_pressed("mode"):
 		actor.change_mode()
-		
-	
+
 	if Input.is_action_just_pressed("shoot"):
-		if Input.is_action_pressed("ui_up"):
-			shoot_angle = -90
-			
-		actor.gun_pivot.rotation_degrees = shoot_angle
-		var new_bullet = actor.bullet.instantiate()
-		get_parent().add_child(new_bullet)
-		new_bullet.setup(true, actor.gun_tip.global_position, shoot_angle, actor.curr_mode)
+		actor.shoot()
+		
+	if Input.is_action_just_pressed("special"):
+		actor.shoot_special()
 
 	actor.move_and_slide()
