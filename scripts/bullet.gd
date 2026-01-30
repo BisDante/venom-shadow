@@ -9,10 +9,11 @@ const DAMAGE = 2
 
 var kill_time = KILLTIME
 var velocity = Vector2.RIGHT
-var mode := Global.Mode.GREEN
+var mode := Global.Mode.YELLOW
 
 func setup(is_players: bool, pos, angle: int, _mode):
 	mode = _mode
+	sprite.modulate = Global.ModeColors[_mode]
 	global_position = pos
 	set_angle(angle)
 	
@@ -23,11 +24,6 @@ func setup(is_players: bool, pos, angle: int, _mode):
 	else:
 		set_collision_layer_value(5, true)
 		set_collision_mask_value(1, true)
-		
-	if mode == Global.Mode.GREEN:
-		sprite.modulate = Color(0, 0.8, 0)
-	else:
-		sprite.modulate = Color(0.6, 0, 0.6)
 
 
 func set_angle(angle) -> void:

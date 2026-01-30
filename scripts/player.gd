@@ -46,11 +46,11 @@ func _ready() -> void:
 func change_mode():
 	if curr_mode == Global.Mode.GREEN:
 		curr_mode = Global.Mode.PURPLE
-		sprite.modulate = Color(0.6, 0, 0.6)
-		
-	else:
+
+	elif curr_mode == Global.Mode.PURPLE:
 		curr_mode = Global.Mode.GREEN
-		sprite.modulate = Color(0, 0.8, 0)
+		
+	sprite.modulate = Global.ModeColors[curr_mode]
 
 func _physics_process(delta: float) -> void:
 	state_machine.update(delta)
