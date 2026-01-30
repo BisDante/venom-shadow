@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://decl64rhft3v5"]
+[gd_scene load_steps=11 format=3 uid="uid://decl64rhft3v5"]
 
 [ext_resource type="Script" uid="uid://cpiqekhl8fj6b" path="res://scripts/player.gd" id="1_hjaqi"]
 [ext_resource type="Texture2D" uid="uid://dax4srugihapr" path="res://assets/sprites/icon.svg" id="1_xo3ru"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://bsgjjl21qjiug" path="res://scripts/player_jump.gd" id="5_qlg0r"]
 [ext_resource type="Script" uid="uid://csje7l58nsi4i" path="res://scripts/player_fall.gd" id="6_tuyoq"]
 [ext_resource type="Script" uid="uid://dcc62cmdt4fjl" path="res://scripts/player_glide.gd" id="7_fjrip"]
+[ext_resource type="Script" uid="uid://n1ispvisb5wl" path="res://scripts/player_crouch.gd" id="8_smehm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xo3ru"]
 size = Vector2(16, 32)
@@ -45,10 +46,11 @@ debug_color = Color(0.19621193, 0.6417471, 0, 0.41960785)
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource("3_qhqgy")
 
-[node name="PlayerRun" type="Node" parent="StateMachine" node_paths=PackedStringArray("jump", "fall")]
+[node name="PlayerRun" type="Node" parent="StateMachine" node_paths=PackedStringArray("jump", "fall", "crouch")]
 script = ExtResource("4_dqkch")
 jump = NodePath("../PlayerJump")
 fall = NodePath("../PlayerFall")
+crouch = NodePath("../PlayerCrouch")
 
 [node name="PlayerJump" type="Node" parent="StateMachine" node_paths=PackedStringArray("run", "fall")]
 script = ExtResource("5_qlg0r")
@@ -62,6 +64,11 @@ glide = NodePath("../PlayerGlide")
 
 [node name="PlayerGlide" type="Node" parent="StateMachine" node_paths=PackedStringArray("run", "fall")]
 script = ExtResource("7_fjrip")
+run = NodePath("../PlayerRun")
+fall = NodePath("../PlayerFall")
+
+[node name="PlayerCrouch" type="Node" parent="StateMachine" node_paths=PackedStringArray("run", "fall")]
+script = ExtResource("8_smehm")
 run = NodePath("../PlayerRun")
 fall = NodePath("../PlayerFall")
 
