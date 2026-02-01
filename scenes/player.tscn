@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://decl64rhft3v5"]
+[gd_scene load_steps=12 format=3 uid="uid://decl64rhft3v5"]
 
 [ext_resource type="Script" uid="uid://cpiqekhl8fj6b" path="res://scripts/player.gd" id="1_hjaqi"]
 [ext_resource type="Texture2D" uid="uid://dax4srugihapr" path="res://assets/sprites/icon.svg" id="1_xo3ru"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://csje7l58nsi4i" path="res://scripts/player_fall.gd" id="6_tuyoq"]
 [ext_resource type="Script" uid="uid://dcc62cmdt4fjl" path="res://scripts/player_glide.gd" id="7_fjrip"]
 [ext_resource type="Script" uid="uid://n1ispvisb5wl" path="res://scripts/player_crouch.gd" id="8_smehm"]
+[ext_resource type="Script" uid="uid://bih0j1tpigitl" path="res://scripts/player_dead.gd" id="9_ur7pv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xo3ru"]
 size = Vector2(16, 32)
@@ -46,30 +47,38 @@ debug_color = Color(0.19621193, 0.6417471, 0, 0.41960785)
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource("3_qhqgy")
 
-[node name="PlayerRun" type="Node" parent="StateMachine" node_paths=PackedStringArray("jump", "fall", "crouch")]
+[node name="PlayerRun" type="Node" parent="StateMachine" node_paths=PackedStringArray("jump", "fall", "crouch", "dead")]
 script = ExtResource("4_dqkch")
 jump = NodePath("../PlayerJump")
 fall = NodePath("../PlayerFall")
 crouch = NodePath("../PlayerCrouch")
+dead = NodePath("../PlayerDead")
 
-[node name="PlayerJump" type="Node" parent="StateMachine" node_paths=PackedStringArray("run", "fall")]
+[node name="PlayerJump" type="Node" parent="StateMachine" node_paths=PackedStringArray("run", "fall", "dead")]
 script = ExtResource("5_qlg0r")
 run = NodePath("../PlayerRun")
 fall = NodePath("../PlayerFall")
+dead = NodePath("../PlayerDead")
 
-[node name="PlayerFall" type="Node" parent="StateMachine" node_paths=PackedStringArray("run", "glide")]
+[node name="PlayerFall" type="Node" parent="StateMachine" node_paths=PackedStringArray("run", "glide", "dead")]
 script = ExtResource("6_tuyoq")
 run = NodePath("../PlayerRun")
 glide = NodePath("../PlayerGlide")
+dead = NodePath("../PlayerDead")
 
-[node name="PlayerGlide" type="Node" parent="StateMachine" node_paths=PackedStringArray("run", "fall")]
+[node name="PlayerGlide" type="Node" parent="StateMachine" node_paths=PackedStringArray("run", "fall", "dead")]
 script = ExtResource("7_fjrip")
 run = NodePath("../PlayerRun")
 fall = NodePath("../PlayerFall")
+dead = NodePath("../PlayerDead")
 
-[node name="PlayerCrouch" type="Node" parent="StateMachine" node_paths=PackedStringArray("run", "fall")]
+[node name="PlayerCrouch" type="Node" parent="StateMachine" node_paths=PackedStringArray("run", "fall", "dead")]
 script = ExtResource("8_smehm")
 run = NodePath("../PlayerRun")
 fall = NodePath("../PlayerFall")
+dead = NodePath("../PlayerDead")
+
+[node name="PlayerDead" type="Node" parent="StateMachine"]
+script = ExtResource("9_ur7pv")
 
 [connection signal="area_entered" from="GrazeRange" to="." method="_on_graze_range_area_entered"]

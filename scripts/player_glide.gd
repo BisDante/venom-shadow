@@ -4,6 +4,12 @@ extends State
 @export var FALL_SPEED = 20
 @export var run : Node
 @export var fall : Node
+@export var dead : Node
+
+func check_hp():
+	if actor.hp <= 0:
+		change_state.emit(dead)
+
 
 func update(delta):
 	actor.velocity.y = FALL_SPEED

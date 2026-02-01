@@ -16,3 +16,6 @@ func change_state(new_state):
 	current_state.exit()
 	current_state = new_state
 	current_state.enter()
+	
+func check_hp():
+	current_state.check_hp()

@@ -16,6 +16,7 @@ var hp = 6
 func receive_damage(damage):
 	hp -= damage
 	print("Ouch! HP: ", hp)
+	state_machine.check_hp()
 
 
 func get_shoot_angle():

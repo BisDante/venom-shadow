@@ -1,10 +1,15 @@
 extends State
 
+@export var SPEED = 100.0
 @export var run : Node
 @export var fall : Node
-@export var SPEED = 100.0
+@export var dead : Node
 
-# Called when the node enters the scene tree for the first time.
+func check_hp():
+	if actor.hp <= 0:
+		change_state.emit(dead)
+
+
 func enter():
 	actor.scale = Vector2(2, 0.5)
 	

@@ -3,6 +3,13 @@ extends State
 @export var SPEED = 200.0
 @export var run : Node
 @export var glide : Node
+@export var dead : Node
+
+
+func check_hp():
+	if actor.hp <= 0:
+		change_state.emit(dead)
+
 
 func update(delta):
 	actor.velocity += actor.get_gravity() * delta

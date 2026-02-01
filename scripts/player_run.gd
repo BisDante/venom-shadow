@@ -5,8 +5,12 @@ extends State
 @export var jump: Node
 @export var fall: Node
 @export var crouch: Node
+@export var dead: Node
 
-	
+func check_hp():
+	if actor.hp <= 0:
+		change_state.emit(dead)
+
 func update(delta):
 	if not actor.is_on_floor():
 		change_state.emit(fall)
