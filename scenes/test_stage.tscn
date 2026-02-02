@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://bwjgucfvcv8lq"]
+[gd_scene load_steps=9 format=3 uid="uid://bwjgucfvcv8lq"]
 
 [ext_resource type="PackedScene" uid="uid://decl64rhft3v5" path="res://scenes/player.tscn" id="1_e15k8"]
+[ext_resource type="Script" uid="uid://bbnav7f486s6s" path="res://scripts/sub_pixel_camera_2d.gd" id="1_o24wk"]
 [ext_resource type="Texture2D" uid="uid://dax4srugihapr" path="res://assets/sprites/icon.svg" id="2_m04ur"]
 [ext_resource type="PackedScene" uid="uid://c556gkchiyx1k" path="res://scenes/killzone.tscn" id="4_80utq"]
 [ext_resource type="PackedScene" uid="uid://t4yxwuukfc5c" path="res://scenes/enemies/flying_eye.tscn" id="5_lpint"]
@@ -11,6 +12,12 @@ size = Vector2(32, 32)
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_lpint"]
 
 [node name="TestStage" type="Node2D"]
+
+[node name="SubPixelCamera2D" type="Camera2D" parent="."]
+position = Vector2(15, 144)
+position_smoothing_enabled = true
+position_smoothing_speed = 4.0
+script = ExtResource("1_o24wk")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." groups=["Level"]]
 position = Vector2(210, 224)
@@ -42,11 +49,6 @@ shape = SubResource("RectangleShape2D_sxr5r")
 
 [node name="Player" parent="." instance=ExtResource("1_e15k8")]
 position = Vector2(15, 160)
-
-[node name="Camera2D" type="Camera2D" parent="Player"]
-position = Vector2(0, -16)
-position_smoothing_enabled = true
-position_smoothing_speed = 4.0
 
 [node name="Killzone" parent="." instance=ExtResource("4_80utq")]
 position = Vector2(10, 243)
