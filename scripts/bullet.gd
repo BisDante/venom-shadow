@@ -39,13 +39,5 @@ func _physics_process(delta: float) -> void:
 		queue_free()
 
 
-func _on_body_entered(body: Node2D) -> void:
-	if body.is_in_group("Player") and body.curr_mode != mode:
-		body.receive_damage(DAMAGE)
-		queue_free()
-	elif body.is_in_group("Enemies"):
-		if body.curr_mode != mode:
-			body.receive_damage(DAMAGE/2)
-			queue_free()
-	elif body.is_in_group("Level"):
-		queue_free()
+func _on_damage_source_area_entered(area: Area2D) -> void:
+	pass # Replace with function body.
