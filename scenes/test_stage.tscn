@@ -1,8 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://bwjgucfvcv8lq"]
+[gd_scene load_steps=7 format=3 uid="uid://bwjgucfvcv8lq"]
 
 [ext_resource type="PackedScene" uid="uid://decl64rhft3v5" path="res://scenes/player.tscn" id="1_e15k8"]
 [ext_resource type="Texture2D" uid="uid://dax4srugihapr" path="res://assets/sprites/icon.svg" id="2_m04ur"]
-[ext_resource type="PackedScene" uid="uid://btpv0jw8cn8yg" path="res://scenes/test_enemy.tscn" id="3_s7ml3"]
 [ext_resource type="PackedScene" uid="uid://c556gkchiyx1k" path="res://scenes/killzone.tscn" id="4_80utq"]
 [ext_resource type="PackedScene" uid="uid://t4yxwuukfc5c" path="res://scenes/enemies/flying_eye.tscn" id="5_lpint"]
 
@@ -41,9 +40,6 @@ texture = ExtResource("2_m04ur")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
 shape = SubResource("RectangleShape2D_sxr5r")
 
-[node name="TestEnemy" parent="." groups=["Enemies"] instance=ExtResource("3_s7ml3")]
-position = Vector2(347, 117)
-
 [node name="Player" parent="." instance=ExtResource("1_e15k8")]
 position = Vector2(15, 160)
 
@@ -58,7 +54,8 @@ position = Vector2(10, 243)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone"]
 shape = SubResource("WorldBoundaryShape2D_lpint")
 
-[node name="Flying eye" parent="." instance=ExtResource("5_lpint")]
-position = Vector2(97, 128)
+[node name="flying_eye" parent="." instance=ExtResource("5_lpint")]
+position = Vector2(139, 148)
+h_speed = 100
 h_duration = 10.0
 v_duration = 5.0
