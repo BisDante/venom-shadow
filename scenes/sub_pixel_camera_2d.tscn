@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://de6n6y37w78er"]
+
+[ext_resource type="Script" uid="uid://bbnav7f486s6s" path="res://scripts/sub_pixel_camera_2d.gd" id="1_nyo2l"]
+[ext_resource type="Script" uid="uid://drk04gvom83sf" path="res://scripts/state_machine.gd" id="2_pbggg"]
+[ext_resource type="Script" uid="uid://bv3ncgd32cl0w" path="res://scripts/cam_follow.gd" id="3_sbd1b"]
+[ext_resource type="Script" uid="uid://ccm8fu5uhmenr" path="res://scripts/cam_lock.gd" id="4_sbd1b"]
+
+[node name="SubPixelCamera2D" type="Camera2D"]
+position_smoothing_enabled = true
+position_smoothing_speed = 4.0
+script = ExtResource("1_nyo2l")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("current_state")]
+script = ExtResource("2_pbggg")
+current_state = NodePath("CamFollow")
+
+[node name="CamFollow" type="Node" parent="StateMachine"]
+script = ExtResource("3_sbd1b")
+
+[node name="CamLock" type="Node" parent="StateMachine"]
+script = ExtResource("4_sbd1b")

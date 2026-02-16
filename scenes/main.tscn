@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://c5ys6cd5orh6l"]
+[gd_scene load_steps=5 format=3 uid="uid://c5ys6cd5orh6l"]
 
 [ext_resource type="Shader" uid="uid://28onx2s6lh5s" path="res://assets/shaders/pixelperfect.gdshader" id="1_0wfyh"]
-[ext_resource type="PackedScene" uid="uid://bwjgucfvcv8lq" path="res://scenes/test_stage.tscn" id="1_o5qli"]
+[ext_resource type="PackedScene" uid="uid://dl0ptckbs7aqn" path="res://scenes/test_stage_2.tscn" id="2_0wfyh"]
+[ext_resource type="Script" uid="uid://bv86hyj60vtkr" path="res://scripts/viewport.gd" id="2_sugp2"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sugp2"]
 shader = ExtResource("1_0wfyh")
@@ -14,9 +15,12 @@ texture_filter = 1
 material = SubResource("ShaderMaterial_sugp2")
 offset_right = 40.0
 offset_bottom = 40.0
+scale = Vector2(3, 3)
+script = ExtResource("2_sugp2")
 
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
 size = Vector2i(427, 240)
+render_target_update_mode = 4
 
-[node name="TestStage" parent="SubViewportContainer/SubViewport" instance=ExtResource("1_o5qli")]
-texture_filter = 1
+[node name="TestStage2" parent="SubViewportContainer/SubViewport" instance=ExtResource("2_0wfyh")]

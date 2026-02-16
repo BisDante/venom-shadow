@@ -21,8 +21,8 @@ Global="*res://scripts/global.gd"
 
 [display]
 
-window/size/viewport_width=427
-window/size/viewport_height=240
+window/size/viewport_width=1280
+window/size/viewport_height=720
 window/size/window_width_override=1280
 window/size/window_height_override=720
 window/stretch/mode="viewport"
@@ -62,6 +62,7 @@ special={
 2d_physics/layer_3="Enemies"
 2d_physics/layer_4="Player Projectiles"
 2d_physics/layer_5="Enemy Projectiles"
+2d_physics/layer_6="Player Obstacles"
 
 [rendering]
 

@@ -1,14 +1,17 @@
-[gd_scene load_steps=4 format=3 uid="uid://btpv0jw8cn8yg"]
+[gd_scene load_steps=6 format=3 uid="uid://btpv0jw8cn8yg"]
 
 [ext_resource type="Texture2D" uid="uid://dax4srugihapr" path="res://assets/sprites/icon.svg" id="1_h17bh"]
 [ext_resource type="Script" uid="uid://b8qgqrcaivgvs" path="res://scripts/test_enemy.gd" id="1_mkyue"]
+[ext_resource type="Script" uid="uid://ddhk6kefvys2t" path="res://scripts/test_enemy_brain.gd" id="3_8c00y"]
+[ext_resource type="Script" uid="uid://gwa0rid43ay1" path="res://scripts/health.gd" id="3_fpxyv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h17bh"]
 size = Vector2(16, 16)
 
-[node name="TestEnemy" type="CharacterBody2D" groups=["Actors"]]
+[node name="TestEnemy" type="CharacterBody2D" groups=["Actors", "Enemies"]]
+texture_filter = 1
 collision_layer = 4
-collision_mask = 10
+collision_mask = 2
 floor_snap_length = 5.0
 script = ExtResource("1_mkyue")
 
@@ -23,3 +26,9 @@ shape = SubResource("RectangleShape2D_h17bh")
 
 [node name="GunTip" type="Marker2D" parent="." groups=["Actors", "Enemies"]]
 position = Vector2(-14, -7)
+
+[node name="Brain" type="Node" parent="."]
+script = ExtResource("3_8c00y")
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("3_fpxyv")

@@ -20,6 +20,7 @@ func setup(is_players: bool, pos, angle: int, _mode):
 	if is_players:
 		set_collision_layer_value(4, true)
 		set_collision_mask_value(3, true)
+		set_collision_mask_value(7, true)
 		
 	else:
 		set_collision_layer_value(5, true)
@@ -45,7 +46,9 @@ func _on_body_entered(body: Node2D) -> void:
 		queue_free()
 	elif body.is_in_group("Enemies"):
 		if body.curr_mode != mode:
+			body.receive_damage(DAMAGE)
+		else:
 			body.receive_damage(DAMAGE/2)
-			queue_free()
+		queue_free()
 	elif body.is_in_group("Level"):
 		queue_free()

@@ -1,4 +1,5 @@
 extends CharacterBody2D
+class_name Player
 
 const bullet = preload("res://scenes/bullet.tscn")
 @onready var gun_pivot = $GunPivot
@@ -38,6 +39,10 @@ func shoot():
 	var new_bullet = bullet.instantiate()
 	get_parent().add_child(new_bullet)
 	new_bullet.setup(true, gun_tip.global_position, shoot_angle, curr_mode)
+
+
+func shoot_special():
+	print("BANG")
 
 
 func _ready() -> void:

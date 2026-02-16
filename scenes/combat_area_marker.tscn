@@ -1,0 +1,49 @@
+[gd_scene load_steps=10 format=3 uid="uid://bk20g5fmyjbgx"]
+
+[ext_resource type="Script" uid="uid://xyajcky7vyf4" path="res://scripts/control_point.gd" id="1_21nl2"]
+[ext_resource type="Script" uid="uid://c742av4dcwyu0" path="res://scripts/wave_manager.gd" id="2_1gyid"]
+[ext_resource type="Script" uid="uid://dvshqwgif2w3v" path="res://scenes/cam_lock_position.gd" id="2_j321a"]
+[ext_resource type="Script" uid="uid://c31sjiqi3nc3e" path="res://scenes/invisible_walls.gd" id="2_r7o7j"]
+[ext_resource type="Script" uid="uid://dfl35n6b08gy0" path="res://scripts/enemy_wave.gd" id="3_wt1n8"]
+[ext_resource type="PackedScene" uid="uid://btpv0jw8cn8yg" path="res://scenes/test_enemy.tscn" id="4_33t5e"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_uvhfp"]
+normal = Vector2(1, 0)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_wykyb"]
+normal = Vector2(-1, 0)
+
+[sub_resource type="Resource" id="Resource_33t5e"]
+script = ExtResource("3_wt1n8")
+enemies = Array[PackedScene]([ExtResource("4_33t5e")])
+position_indexes = Array[int]([0, 0, 0, 0, 0])
+enemy_spawn_ids = Array[int]([0, 0, 0, 0, 0])
+color_array = Array[int]([0, 1, 0, 1, 0])
+next_enemy_time = 30
+next_wave_time = 5
+metadata/_custom_type_script = "uid://dfl35n6b08gy0"
+
+[node name="ControlPoint" type="Marker2D"]
+script = ExtResource("1_21nl2")
+
+[node name="InvisibleWalls" type="StaticBody2D" parent="."]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("2_r7o7j")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InvisibleWalls"]
+position = Vector2(-214, 0)
+shape = SubResource("WorldBoundaryShape2D_uvhfp")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="InvisibleWalls"]
+position = Vector2(213, 0)
+shape = SubResource("WorldBoundaryShape2D_wykyb")
+
+[node name="CamLockPosition" type="Marker2D" parent="."]
+script = ExtResource("2_j321a")
+
+[node name="WaveManager" type="Node2D" parent="."]
+script = ExtResource("2_1gyid")
+enemy_waves = Array[ExtResource("3_wt1n8")]([SubResource("Resource_33t5e")])
+
+[node name="SpawnPosition0" type="Marker2D" parent="WaveManager"]

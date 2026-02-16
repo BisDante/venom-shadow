@@ -1,16 +1,27 @@
 extends Camera2D
 
 var actual_cam_pos: Vector2
+var curr_lock_pos: Vector2
+var viewport : SubViewportContainer
+@export var speed = 10
+
+@onready var state_machine = $StateMachine
+@onready var player := $"../Player"
 
 func _ready() -> void:
-	pass # Replace with function body.
+	state_machine.init(self)
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+func set_viewport(_viewport):
+	viewport = _viewport
+
+
+func set_lock_pos(lock_pos):
+	curr_lock_pos = lock_pos
+
+func change_state(state):
+	state_machine.change_state(state)
+
+
 func _process(delta: float) -> void:
-	actual_cam_pos = actual_cam_pos.lerp($"../Player".global_position, delta * 6)
-	
-	var subpixel_offset = actual_cam_pos.round() - actual_cam_pos
-	get_parent().get_parent().get_parent().material.set_shader_parameter("cam_offset", subpixel_offset)
-	
-	global_position = actual_cam_pos.round()
+	state_machine.update(delta)

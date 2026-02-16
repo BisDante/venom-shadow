@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=3 uid="uid://d17wjjol6cdgv"]
+
+[ext_resource type="Script" uid="uid://birmw4m3m5ffi" path="res://motor_skeleton.gd" id="1_1bshe"]
+[ext_resource type="Texture2D" uid="uid://bhlpv1qshlim2" path="res://assets/sprites/bikeskelly.png" id="2_weh7o"]
+[ext_resource type="Script" uid="uid://bcd7bibal4p8d" path="res://scripts/motor_skeleton_brain.gd" id="3_weh7o"]
+[ext_resource type="Script" uid="uid://gwa0rid43ay1" path="res://scripts/health.gd" id="4_10y16"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_10y16"]
+size = Vector2(55, 21)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i1icy"]
+size = Vector2(8, 21)
+
+[node name="MotorSkeleton" type="CharacterBody2D" groups=["Enemies"]]
+texture_filter = 1
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("1_1bshe")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+position = Vector2(0, -9)
+rect = Rect2(-28, -32, 55, 42)
+enable_node_path = NodePath("../Brain")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -24)
+texture = ExtResource("2_weh7o")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1.5, -10.5)
+shape = SubResource("RectangleShape2D_10y16")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2(-6, -31.5)
+shape = SubResource("RectangleShape2D_i1icy")
+
+[node name="Brain" type="Node" parent="."]
+script = ExtResource("3_weh7o")
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("4_10y16")
+
+[connection signal="screen_exited" from="VisibleOnScreenEnabler2D" to="." method="_on_visible_on_screen_enabler_2d_screen_exited"]
