@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=4 uid="uid://d2bgtxvnn7r0p"]
+[gd_scene load_steps=8 format=4 uid="uid://d2bgtxvnn7r0p"]
 
 [ext_resource type="TileSet" uid="uid://56ji3sga7o3q" path="res://assets/Tilemap/test_tilemap.tres" id="1_adaeu"]
 [ext_resource type="Script" uid="uid://b6urd1j8x5mi4" path="res://scripts/stage.gd" id="1_x74nj"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://de6n6y37w78er" path="res://scenes/sub_pixel_camera_2d.tscn" id="3_g865m"]
 [ext_resource type="PackedScene" uid="uid://btpv0jw8cn8yg" path="res://scenes/test_enemy.tscn" id="5_g865m"]
 [ext_resource type="PackedScene" uid="uid://d17wjjol6cdgv" path="res://scenes/motor_skeleton.tscn" id="6_sh02n"]
+[ext_resource type="PackedScene" uid="uid://yg4ral3ih5dj" path="res://scenes/endless_enemies_spawner.tscn" id="7_cxkfx"]
 
 [node name="TestStage3" type="Node2D"]
 texture_filter = 1
@@ -21,6 +22,9 @@ position = Vector2(58, 143)
 [node name="SubPixelCamera2D" parent="." instance=ExtResource("3_g865m")]
 position = Vector2(133, 175)
 
+[node name="EndlessEnemiesSpawner" parent="." instance=ExtResource("7_cxkfx")]
+position = Vector2(49, 181)
+
 [node name="PlacedEnemies" type="Node" parent="."]
 
 [node name="MotorSkeleton" parent="PlacedEnemies" instance=ExtResource("6_sh02n")]
@@ -28,3 +32,5 @@ position = Vector2(462, 151)
 
 [node name="TestEnemy" parent="PlacedEnemies" instance=ExtResource("5_g865m")]
 position = Vector2(275, 167)
+
+[node name="ControlPoints" type="Node" parent="."]

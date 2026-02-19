@@ -8,6 +8,8 @@ extends Node2D
 @onready var player := $Player
 @onready var curr_checkpoint = stage_beginning
 
+@export var next_stage: PackedScene
+
 var curr_control_point
 
 func _ready() -> void:
@@ -22,14 +24,24 @@ func _ready() -> void:
 		if child.has_node("Checkpoint"):
 			var checkpoint = child.get_node("Checkpoint")
 			checkpoint.connect("checkpoint_reached", on_checkpoint_reached)
+		
+		if child.has_node("StageEnder"):
+			var stage_ender = child.get_node("StageEnder")
+			stage_ender.connect("stage_ended", on_stage_ended)
 	
 	for child in placed_enemies.get_children():
+		child.set_player(player)
 		child.init()
 
 
 func on_control_point_reached(control_point):
 	curr_control_point = control_point
 
+
+func on_stage_ended():
+	var new_stage = next_stage.instantiate()
+	get_parent().add_child(new_stage)
+	queue_free()
 
 func on_checkpoint_reached(_checkpoint):
 	curr_checkpoint = _checkpoint

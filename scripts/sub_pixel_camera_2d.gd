@@ -9,6 +9,9 @@ var viewport : SubViewportContainer
 @onready var player := $"../Player"
 
 func _ready() -> void:
+	if not viewport:
+		viewport = Global.viewport
+		
 	state_machine.init(self)
 
 

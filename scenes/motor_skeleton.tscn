@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://d17wjjol6cdgv"]
 
-[ext_resource type="Script" uid="uid://birmw4m3m5ffi" path="res://motor_skeleton.gd" id="1_1bshe"]
+[ext_resource type="Script" uid="uid://birmw4m3m5ffi" path="res://scripts/motor_skeleton.gd" id="1_1bshe"]
 [ext_resource type="Texture2D" uid="uid://bhlpv1qshlim2" path="res://assets/sprites/bikeskelly.png" id="2_weh7o"]
 [ext_resource type="Script" uid="uid://bcd7bibal4p8d" path="res://scripts/motor_skeleton_brain.gd" id="3_weh7o"]
 [ext_resource type="Script" uid="uid://gwa0rid43ay1" path="res://scripts/health.gd" id="4_10y16"]

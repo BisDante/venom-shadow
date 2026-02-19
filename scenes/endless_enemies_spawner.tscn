@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://yg4ral3ih5dj"]
+
+[ext_resource type="Script" uid="uid://yxerh814gr7h" path="res://scripts/endless_enemies_spawner.gd" id="1_gpfys"]
+
+[node name="EndlessEnemiesSpawner" type="Node2D"]
+script = ExtResource("1_gpfys")
+
+[node name="SpawnPosition0" type="Marker2D" parent="."]
+position = Vector2(-240, -98)
+
+[node name="SpawnPosition1" type="Marker2D" parent="."]
+position = Vector2(240, -98)

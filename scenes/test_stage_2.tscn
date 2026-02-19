@@ -1,17 +1,21 @@
-[gd_scene load_steps=9 format=4 uid="uid://dl0ptckbs7aqn"]
+[gd_scene load_steps=12 format=4 uid="uid://dl0ptckbs7aqn"]
 
 [ext_resource type="PackedScene" uid="uid://de6n6y37w78er" path="res://scenes/sub_pixel_camera_2d.tscn" id="1_ax7je"]
 [ext_resource type="TileSet" uid="uid://56ji3sga7o3q" path="res://assets/Tilemap/test_tilemap.tres" id="1_djv57"]
 [ext_resource type="Script" uid="uid://b6urd1j8x5mi4" path="res://scripts/stage.gd" id="1_hj4yg"]
+[ext_resource type="PackedScene" uid="uid://d2bgtxvnn7r0p" path="res://scenes/test_stage_3.tscn" id="2_hqj2a"]
 [ext_resource type="PackedScene" uid="uid://decl64rhft3v5" path="res://scenes/player.tscn" id="2_o884m"]
 [ext_resource type="PackedScene" uid="uid://bk20g5fmyjbgx" path="res://scenes/combat_area_marker.tscn" id="4_hj4yg"]
+[ext_resource type="PackedScene" uid="uid://yg4ral3ih5dj" path="res://scenes/endless_enemies_spawner.tscn" id="5_hqj2a"]
 [ext_resource type="PackedScene" uid="uid://btpv0jw8cn8yg" path="res://scenes/test_enemy.tscn" id="6_7l0u3"]
 [ext_resource type="Script" uid="uid://dxeux7i4bdpcd" path="res://scripts/checkpoint.gd" id="8_b6kk3"]
-[ext_resource type="Script" uid="uid://yxerh814gr7h" path="res://scripts/endless_enemies_spawner.gd" id="8_euaad"]
+[ext_resource type="Script" uid="uid://xyajcky7vyf4" path="res://scripts/control_point.gd" id="9_l126l"]
+[ext_resource type="Script" uid="uid://gghebm1ihyqm" path="res://scripts/stage_ender.gd" id="10_hqj2a"]
 
 [node name="TestStage2" type="Node2D"]
 texture_filter = 1
 script = ExtResource("1_hj4yg")
+next_stage = ExtResource("2_hqj2a")
 
 [node name="SubPixelCamera2D" parent="." instance=ExtResource("1_ax7je")]
 speed = 20
@@ -20,15 +24,8 @@ speed = 20
 tile_map_data = PackedByteArray("AAAAAAsAAQADAAQAAAABAAsAAQAEAAQAAAACAAsAAQADAAQAAAADAAsAAQAEAAQAAAAEAAsAAQADAAQAAAAFAAsAAQAEAAQAAAAGAAsAAQADAAQAAAAHAAsAAQAEAAQAAAAIAAsAAQADAAQAAAAJAAsAAQAEAAQAAAAKAAsAAQADAAQAAAALAAsAAQAEAAQAAAAMAAsAAQADAAQAAAANAAsAAQAEAAQAAAAOAAsAAQADAAQAAAAPAAsAAQAEAAQAAAAQAAsAAQADAAQAAAARAAsAAQAEAAQAAAASAAsAAQADAAQAAAATAAsAAQAEAAQAAAAUAAsAAQADAAQAAAAVAAsAAQAEAAQAAAAWAAsAAQADAAQAAAAXAAsAAQAEAAQAAAAYAAsAAQADAAQAAAAZAAsAAQADAAQAAAAaAAsAAQADAAQAAAAbAAsAAQADAAQAAAAcAAsAAQADAAQAAAAdAAsAAQADAAQAAAAeAAsAAQADAAQAAAAfAAsAAQADAAQAAAAgAAsAAQADAAQAAAAhAAsAAQADAAQAAAAiAAsAAQADAAQAAAAjAAsAAQADAAQAAAAkAAsAAQADAAQAAAAlAAsAAQADAAQAAAAmAAsAAQADAAQAAAAnAAsAAQADAAQAAAAoAAsAAQADAAQAAAApAAsAAQADAAQAAAAqAAsAAQADAAQAAAArAAsAAQADAAQAAAAsAAsAAQADAAQAAAAtAAsAAQADAAQAAAAuAAsAAQADAAQAAAAvAAsAAQADAAQAAAAwAAsAAQADAAQAAAAjAAQAAQADAAQAAAAxAAsAAQADAAQAAAAyAAsAAQADAAQAAAAzAAsAAQADAAQAAAA0AAsAAQADAAQAAAA1AAsAAQADAAQAAAA2AAsAAQADAAQAAAA3AAsAAQADAAQAAAA4AAsAAQADAAQAAAA5AAsAAQADAAQAAAA6AAsAAQADAAQAAAA7AAsAAQADAAQAAAA8AAsAAQADAAQAAAA9AAsAAQADAAQAAAA+AAsAAQADAAQAAAA/AAsAAQADAAQAAABAAAsAAQADAAQAAABBAAsAAQADAAQAAABCAAsAAQADAAQAAABDAAsAAQADAAQAAABEAAsAAQADAAQAAABFAAsAAQADAAQAAABGAAsAAQADAAQAAABHAAsAAQADAAQAAABIAAsAAQADAAQAAABJAAsAAQADAAQAAAA=")
 tile_set = ExtResource("1_djv57")
 
-[node name="EndlessEnemiesSpawner" type="Node2D" parent="."]
+[node name="EndlessEnemiesSpawner" parent="." instance=ExtResource("5_hqj2a")]
 position = Vector2(317, 248)
-script = ExtResource("8_euaad")
-
-[node name="SpawnPosition0" type="Marker2D" parent="EndlessEnemiesSpawner"]
-position = Vector2(-240, -98)
-
-[node name="SpawnPosition1" type="Marker2D" parent="EndlessEnemiesSpawner"]
-position = Vector2(240, -98)
 
 [node name="Player" parent="." instance=ExtResource("2_o884m")]
 position = Vector2(129, 174)
@@ -58,6 +55,13 @@ position = Vector2(-144, 0)
 [node name="Checkpoint" type="Marker2D" parent="ControlPoints/CombatAreaMarker"]
 position = Vector2(-80, -21)
 script = ExtResource("8_b6kk3")
+
+[node name="StageEnd" type="Marker2D" parent="ControlPoints"]
+position = Vector2(1273, 129)
+script = ExtResource("9_l126l")
+
+[node name="StageEnder" type="Node" parent="ControlPoints/StageEnd"]
+script = ExtResource("10_hqj2a")
 
 [node name="StageBeginning" type="Marker2D" parent="."]
 position = Vector2(24, 166)
