@@ -1,5 +1,6 @@
 extends StaticBody2D
 
+var player : Player
 
 func set_player(_player):
 	pass
@@ -18,5 +19,8 @@ func reached():
 
 
 func stage_event_end():
-	print("InvisibleWalls")
 	set_collision_layer_value(6, false)
+
+
+func on_player_dead():
+	stage_event_end()

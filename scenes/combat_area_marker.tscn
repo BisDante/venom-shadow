@@ -23,7 +23,7 @@ next_enemy_time = 30
 next_wave_time = 5
 metadata/_custom_type_script = "uid://dfl35n6b08gy0"
 
-[node name="ControlPoint" type="Marker2D"]
+[node name="CombatAreaMarker" type="Marker2D"]
 script = ExtResource("1_21nl2")
 
 [node name="InvisibleWalls" type="StaticBody2D" parent="."]

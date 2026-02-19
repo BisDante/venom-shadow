@@ -11,7 +11,7 @@ var active = false
 @export var score_value : int = 100
 @export var curr_mode := Global.Mode.GREEN
 
-signal dead
+signal enemy_dead(enemy)
 signal killed_by_player
 
 
@@ -32,7 +32,7 @@ func receive_damage(damage):
 		on_death()
 
 func on_death():
-	dead.emit()
+	enemy_dead.emit(self)
 	queue_free()
 
 func set_mode(mode):

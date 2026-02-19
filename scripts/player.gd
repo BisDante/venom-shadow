@@ -8,10 +8,22 @@ const bullet = preload("res://scenes/bullet.tscn")
 @onready var sprite = $Sprite2D
 @onready var coll_shape = $CollisionShape2D
 @onready var graze_shape = $GrazeRange/CollisionShape2D
+@export var max_lives := 3
+@export var max_hp := 6
 
 var curr_mode = Global.Mode.GREEN
 var facing = 1 # 1 direita -1 esquerda
-var hp = 6
+var hp 
+var lives
+
+signal player_dead
+
+
+func _ready() -> void:
+	hp = max_hp
+	lives = max_lives
+	state_machine.init(self)
+	sprite.modulate = Color(0, 0.8, 0)
 
 
 func receive_damage(damage):
@@ -19,7 +31,12 @@ func receive_damage(damage):
 	print("Ouch! HP: ", hp)
 	state_machine.check_hp()
 
-
+func revive():
+	set_collision_layer_value(1, true)
+	lives -= 1
+	hp = max_hp
+	state_machine.change_state(state_machine.get_child(0))
+	
 func get_shoot_angle():
 	var shoot_angle = 0 + 90 * (facing - 1)
 	if not is_on_floor():
@@ -43,11 +60,6 @@ func shoot():
 
 func shoot_special():
 	print("BANG")
-
-
-func _ready() -> void:
-	state_machine.init(self)
-	sprite.modulate = Color(0, 0.8, 0)
 
 
 func change_mode():

@@ -22,5 +22,4 @@ func change_state(new_state):
 	current_state.enter()
 	
 func check_hp():
-	if actor.hp > 0:
-		current_state.check_hp()
+	current_state.check_hp()

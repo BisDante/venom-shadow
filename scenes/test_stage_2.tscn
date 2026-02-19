@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=4 uid="uid://dl0ptckbs7aqn"]
+[gd_scene load_steps=9 format=4 uid="uid://dl0ptckbs7aqn"]
 
 [ext_resource type="PackedScene" uid="uid://de6n6y37w78er" path="res://scenes/sub_pixel_camera_2d.tscn" id="1_ax7je"]
 [ext_resource type="TileSet" uid="uid://56ji3sga7o3q" path="res://assets/Tilemap/test_tilemap.tres" id="1_djv57"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://decl64rhft3v5" path="res://scenes/player.tscn" id="2_o884m"]
 [ext_resource type="PackedScene" uid="uid://bk20g5fmyjbgx" path="res://scenes/combat_area_marker.tscn" id="4_hj4yg"]
 [ext_resource type="PackedScene" uid="uid://btpv0jw8cn8yg" path="res://scenes/test_enemy.tscn" id="6_7l0u3"]
+[ext_resource type="Script" uid="uid://dxeux7i4bdpcd" path="res://scripts/checkpoint.gd" id="8_b6kk3"]
 [ext_resource type="Script" uid="uid://yxerh814gr7h" path="res://scripts/endless_enemies_spawner.gd" id="8_euaad"]
 
 [node name="TestStage2" type="Node2D"]
@@ -39,19 +40,26 @@ position = Vector2(248, 170)
 
 [node name="ControlPoints" type="Node" parent="."]
 
-[node name="ControlPoint" parent="ControlPoints" instance=ExtResource("4_hj4yg")]
+[node name="CombatAreaMarker" parent="ControlPoints" instance=ExtResource("4_hj4yg")]
 position = Vector2(636, 203)
 
-[node name="InvisibleWalls" parent="ControlPoints/ControlPoint" index="0"]
+[node name="InvisibleWalls" parent="ControlPoints/CombatAreaMarker" index="0"]
 position = Vector2(148, -56)
 
-[node name="CamLockPosition" parent="ControlPoints/ControlPoint" index="1"]
+[node name="CamLockPosition" parent="ControlPoints/CombatAreaMarker" index="1"]
 position = Vector2(148, -56)
 
-[node name="WaveManager" parent="ControlPoints/ControlPoint" index="2"]
+[node name="WaveManager" parent="ControlPoints/CombatAreaMarker" index="2"]
 position = Vector2(148, -75)
 
-[node name="SpawnPosition0" parent="ControlPoints/ControlPoint/WaveManager" index="0"]
+[node name="SpawnPosition0" parent="ControlPoints/CombatAreaMarker/WaveManager" index="0"]
 position = Vector2(-144, 0)
 
-[editable path="ControlPoints/ControlPoint"]
+[node name="Checkpoint" type="Marker2D" parent="ControlPoints/CombatAreaMarker"]
+position = Vector2(-80, -21)
+script = ExtResource("8_b6kk3")
+
+[node name="StageBeginning" type="Marker2D" parent="."]
+position = Vector2(24, 166)
+
+[editable path="ControlPoints/CombatAreaMarker"]
